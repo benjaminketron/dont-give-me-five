@@ -91,7 +91,7 @@ namespace Fives
 
                             if (coefficient > 5)
                             {
-                                count += (int)Math.Pow(10, magnitude) - 1;
+                                count += (int)Math.Pow(10, magnitude) - InstanceOfFiveBase((int)Math.Pow(10, magnitude));
                             }
                             else
                             {
