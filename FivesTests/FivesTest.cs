@@ -80,7 +80,7 @@ namespace FivesTests
         {
             var result = new List<object>();
 
-            for (int i = 1; i <= 100000; i++)
+            for (int i = 1; i <= 1000000; i++)
             {
                 var number = i;
                 var expected = CountFivesIteratively(i);
