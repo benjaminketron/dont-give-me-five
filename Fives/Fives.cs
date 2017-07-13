@@ -50,7 +50,7 @@ namespace Fives
             {
                 return 0;
             }
-            if (number <= 10)
+            else if (number <= 10)
             {
                 return 1;
             }
@@ -59,13 +59,6 @@ namespace Fives
                 var finalMagnitude = (int)Math.Log10(number);
                 if (magnitude > finalMagnitude)
                 {
-                    //var coefficient = number % (int)Math.Pow(10, finalMagnitude + 1) / (int)Math.Pow(10, finalMagnitude);
-
-                    //if (coefficient >= 5)
-                    //{
-                    //    count += (int)Math.Pow(10, finalMagnitude) - 2 * CountInstancesOfFiveFromZeroToNumber((int)Math.Pow(10, finalMagnitude));
-                    //}
-
                     return count;
                 }
                 else
