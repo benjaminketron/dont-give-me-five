@@ -4,6 +4,7 @@
 
 /.vs/CountWithoutFive/v15/.suo
 /Fives/bin/Debug/netcoreapp1.1
-/Fives/obj
 /FivesTests/bin/Debug/netcoreapp1.1
-/FivesTests/obj
+/FivesTests/obj/Debug/netcoreapp1.1
+/Fives/obj/Debug/netcoreapp1.1
+/TestResults
