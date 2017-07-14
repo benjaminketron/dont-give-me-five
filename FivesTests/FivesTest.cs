@@ -55,7 +55,7 @@ namespace FivesTests
         [InlineData(4, 555, 401)]
         [InlineData(-4, 555, 409)]
         [InlineData(-555, -4, 401)]
-        [InlineData(-100, 100, 136)]        
+        [InlineData(-100, 100, 163)]        
         public void CountOfNotFivesInRangeTest(int start, int end, int expected)
         {
             var fives = new Fives.Fives();

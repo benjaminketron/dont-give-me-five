@@ -171,7 +171,7 @@ namespace Fives
         public int CountOfNotFivesInRange(int start, int end)
         {
             var fivesCount = CountOfFivesInRange(start, end);
-            var completeCount = (int)Math.Abs(end - start);
+            var completeCount = (int)Math.Abs(end - start) + 1;
             return completeCount - fivesCount;
         }
     }
