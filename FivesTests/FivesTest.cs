@@ -28,33 +28,6 @@ namespace FivesTests
         }
 
         [Theory, MemberData(nameof(CountInstancesOfFiveFromZeroToNumberData))]
-        //[InlineData(10, 1)]
-        //[InlineData(20, 2)]
-        //[InlineData(30, 3)]
-        //[InlineData(40, 4)]
-        //[InlineData(50, 6)]
-        //[InlineData(60, 15)]
-        //[InlineData(70, 16)]
-        //[InlineData(80, 17)]
-        //[InlineData(90, 18)]
-        //[InlineData(100, 19)]
-        //[InlineData(110, 20)]
-        //[InlineData(120, 21)]
-        //[InlineData(130, 22)]
-        //[InlineData(140, 23)]
-        //[InlineData(150, 25)]
-        //[InlineData(160, 34)]
-        //[InlineData(170, 35)]
-        //[InlineData(180, 36)]
-        //[InlineData(190, 37)]
-        //[InlineData(200, 38)]
-        //[InlineData(500, 96)]
-        //[InlineData(2000, 542)]
-        //[InlineData(2100, 561)]
-        //[InlineData(2110, 562)]
-        //[InlineData(5605, 1961)]
-        //[InlineData(5608, 1964)]
-        //[InlineData(5678, 2034)]
         public void CountInstancesOfFiveFromZeroToNumber(int number, int expected)
         {
             var fives = new Fives.Fives();
@@ -66,21 +39,37 @@ namespace FivesTests
 
         [Theory]
         [InlineData(4, 555, 151)]
-        public void StartToEndFiveCountTest(int start, int end, int expected)
+        [InlineData(-4, 555, 151)]
+        [InlineData(-555, -4, 151)]
+        [InlineData(-100, 100, 38)]
+        public void CountOfFivesInRangeTest(int start, int end, int expected)
         {
             var fives = new Fives.Fives();
 
-            var excludeCount = fives.CountInstancesOfFiveFromZeroToNumber(start - 1);
-            var includeCount = fives.CountInstancesOfFiveFromZeroToNumber(end);
+            var result = fives.CountOfFivesInRange(start, end);
 
-            Assert.Equal(expected, includeCount - excludeCount);
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(4, 555, 401)]
+        [InlineData(-4, 555, 409)]
+        [InlineData(-555, -4, 401)]
+        [InlineData(-100, 100, 136)]        
+        public void CountOfNotFivesInRangeTest(int start, int end, int expected)
+        {
+            var fives = new Fives.Fives();
+
+            var result = fives.CountOfNotFivesInRange(start, end);
+
+            Assert.Equal(expected, result);
         }
 
         public static List<object> CountInstancesOfFiveFromZeroToNumberData()
         {
             var result = new List<object>();
 
-            for (int i = 1; i <= 100000; i++)
+            for (int i = 1; i <= 10000; i++)
             {
                 var number = i;
                 var expected = CountFivesIteratively(i);
@@ -103,6 +92,6 @@ namespace FivesTests
             }
 
             return result;
-        }
+        }        
     }
 }

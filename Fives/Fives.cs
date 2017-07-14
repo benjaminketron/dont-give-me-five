@@ -2,13 +2,21 @@
 
 namespace Fives
 {
-    public class Fives
+    public class Fives : IFives
     {
         public Fives()
         {
 
         }
 
+        /// <summary>
+        /// Returns the count of numbers that do contain the digit five in the inclusive range of 0 to number where number is positive and always 10^n where 
+        /// n is >= 0.
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="magnitude"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public int InstanceOfFiveBase(int number, int magnitude = 1, int count = 1)
         {
             if (number < 5)
@@ -44,6 +52,13 @@ namespace Fives
             return count;
         }
 
+        /// <summary>
+        /// Returns the count of numbers that do contain the digit five in the inclusive range of 0 to number where number is positive.
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="magnitude"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public int CountInstancesOfFiveFromZeroToNumber(int number, int magnitude = 0, int count = 1)
         {
             if (number < 5)
@@ -103,6 +118,61 @@ namespace Fives
                     return count;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns the count of numbers that do contain the digit five in the inclusive range of start to end.
+        /// The start parameter must be less than or equal to the end parameter; otherwise, and exception is thrown.
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public int CountOfFivesInRange(int start, int end)
+        {
+            var result = 0;
+
+            if (end < start)
+            {
+                throw new Exception("The start parameter must be less than or equal to the end parameter.");
+            }
+
+            if (start <= 0 && end <= 0)
+            {
+                var temp = end;
+                end = (int)Math.Abs(start);
+                start = (int)Math.Abs(temp);
+            }
+
+            if (start < 0 && end > 0) {
+                //var startNegative = 0;
+                var endNegative = (int)Math.Abs(start);
+                //var startPositive = 0;
+                var endPositive = end;
+
+                result = CountInstancesOfFiveFromZeroToNumber(endNegative) + CountInstancesOfFiveFromZeroToNumber(endPositive);
+            }
+            else
+            {
+                var excludedCount = start > 0 ? CountInstancesOfFiveFromZeroToNumber(start - 1) : 0;
+                var includedCount = CountInstancesOfFiveFromZeroToNumber(end);
+                result = includedCount - excludedCount;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the count of numbers that do not contain the digit five in the inclusive range of start to end.
+        /// The start parameter must be less than or equal to the end parameter; otherwise, and exception is thrown.
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public int CountOfNotFivesInRange(int start, int end)
+        {
+            var fivesCount = CountOfFivesInRange(start, end);
+            var completeCount = (int)Math.Abs(end - start);
+            return completeCount - fivesCount;
         }
     }
 }
